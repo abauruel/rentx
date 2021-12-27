@@ -1,5 +1,6 @@
+import 'reflect-metadata'
 import { ICategoriesRepository } from "../../repositories/ICategoriesRepository";
-import {inject, injectable} from 'tsyringe'
+import { inject, injectable } from 'tsyringe'
 
 interface IRequest {
   name: string;
@@ -10,7 +11,7 @@ interface IRequest {
 class CreateCategoryUseCase {
   constructor(
     @inject('CategoriesRepository')
-    private categoryRepository: ICategoriesRepository) {}
+    private categoryRepository: ICategoriesRepository) { }
   async execute({ name, description }: IRequest): Promise<void> {
     const categoryAlreadyExist = await this.categoryRepository.findByName(name);
 

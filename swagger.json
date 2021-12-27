@@ -1,0 +1,143 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "RentX Documentation",
+    "description": "This is an API Rent car",
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "Category"
+    },
+    {
+      "name": "Specification"
+    }
+  ],
+  "paths": {
+    "/categories": {
+      "post": {
+        "summary": "Create Category",
+        "description": "Create a new category",
+        "operationId": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string"
+                }
+              },
+              "example": {
+                "name": "category name",
+                "description": "category description sample"
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "Default error sample response"
+          }
+        },
+        "tags": [
+          "Category"
+        ]
+      },
+      "get": {
+        "summary": "List categories",
+        "description": "this method is able to list all categories registered",
+        "operationId": "",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "success": {
+                    "value": "[\n{\n \"name\":\"SUV\",\n\"description\":\"utilitario\"\n}]"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Category"
+        ]
+      }
+    },
+    "/categories/import": {
+      "post": {
+        "summary": "Upload a new category",
+        "description": "upload a new category from csv file",
+        "requestBody": {
+          "content": {
+            "multipart/form-data:": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created"
+          }
+        },
+        "tags": [
+          "Category"
+        ]
+      }
+    },
+    "/specifications": {
+      "post": {
+        "summary": "Create specification",
+        "description": "create a new specification",
+        "operationId": "",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/Specification"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "500": {
+            "description": " Specification already exists"
+          }
+        },
+        "tags": [
+          "Specification"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "Specification": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
